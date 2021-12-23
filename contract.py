@@ -75,7 +75,9 @@ if tx_receipt is None:
 #diagnostics
 #print (tx_receipt)
 
+#====================================================================
 
+#13: Check the contract address before calling the greet function, and construct the instance with the correct address:
 
 print("Contract address is:",tx_receipt.contractAddress)
 
@@ -88,9 +90,14 @@ greeter = W3.eth.contract(
 print("Output from greet()")
 print(greeter.functions.greet().call())
 
+#***Set the contract address if you have deployed through Remix/MetaMask
+
+#14*:Adjust the transaction / raw transaction code as follows:
+
+#===============================================================
 
 nonce = W3.eth.getTransactionCount(address1)
-tx_dict = greeter.functions.setGreeting('My name is James Leonard and my student number is 10571088').buildTransaction({
+tx_dict = greeter.functions.setGreeting('My name').buildTransaction({
   'chainId': 3,
   'gas': 1400000,
   'gasPrice': w3.toWei('40', 'gwei'),
@@ -113,8 +120,8 @@ while tx_receipt is None and (count < 30):
 if tx_receipt is None:
   print (" {'status': 'failed', 'error': 'timeout'} ")
 
-#tx_hash = greeter.functions.setGreeting('Nihao').transact({"from":account1.address})
+#tx_hash = greeter.functions.setGreeting('My name').transact({"from":account1.address})
 #tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
-print("James()")
+print("Output from greet()")
 print(greeter.functions.greet().call({"from":account1.address}))
-#'Nihao'
+#'My name'
